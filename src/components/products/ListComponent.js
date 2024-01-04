@@ -4,6 +4,7 @@ import { API_SERVER_HOST } from "../../api/todoApi";
 import FetchingModal from "../common/FetchingModal";
 import { getList } from "../../api/productsApi";
 import PageComponent from "../common/PageComponent";
+import useCustomLogin from "../../hooks/useCustomLogin";
 
 const host = API_SERVER_HOST;
 
@@ -21,6 +22,7 @@ const initState = {
 };
 
 const ListComponent = () => {
+  const { exceptionHandle } = useCustomLogin();
   const { page, size, refresh, moveToList, moveToRead } = useCustomMove();
 
   const [serverData, setServerData] = useState({ ...initState });
@@ -29,11 +31,13 @@ const ListComponent = () => {
   const [fetching, setFetching] = useState(false);
   useEffect(() => {
     setFetching(true);
-    getList({ page, size }).then((data) => {
-      console.log(data);
-      setServerData(data);
-      setFetching(false);
-    });
+    getList({ page, size })
+      .then((data) => {
+        console.log(data);
+        setServerData(data);
+        setFetching(false);
+      })
+      .catch((err) => exceptionHandle(err));
   }, [page, size, refresh]);
 
   return (
