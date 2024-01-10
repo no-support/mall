@@ -4,6 +4,7 @@ import FetchingModal from "../common/FetchingModal";
 import ResultModal from "../common/ResultModal";
 import { API_SERVER_HOST } from "../../api/todoApi";
 import useCustomMove from "../../hooks/useCustomMove";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const initState = {
   pno: 0,
@@ -17,24 +18,31 @@ const initState = {
 const host = API_SERVER_HOST;
 
 const ModifyComponent = ({ pno }) => {
-  const [product, setProduct] = useState({ ...initState });
   // 결과 모달
-  const [result, setResult] = useState(null);
+  // const [result, setResult] = useState(null);
+
+  // const [fetching, setFetching] = useState(false);
 
   // 이동용 함수
   const { moveToRead, moveToList } = useCustomMove();
-
-  const [fetching, setFetching] = useState(false);
+  const [product, setProduct] = useState(initState);
 
   const uplodaRef = useRef();
 
+  const query = useQuery(["products", pno], () => getOne(pno), {
+    staleTime: Infinity,
+  });
+
   useEffect(() => {
-    setFetching(true);
-    getOne(pno).then((data) => {
-      setProduct(data);
-      setFetching(false);
-    });
-  }, [pno]);
+    if (query.isSuccess) {
+      setProduct(query.data);
+    }
+    // setFetching(true);
+    // getOne(pno).then((data) => {
+    //   setProduct(data);
+    //   setFetching(false);
+    // });
+  }, [pno, query.data, query.isSuccess]);
 
   const handleChangeProduct = (e) => {
     product[e.target.name] = e.target.value;
@@ -48,6 +56,8 @@ const ModifyComponent = ({ pno }) => {
     product.uploadFileNames = resultFileNames;
     setProduct({ ...product });
   };
+
+  const modMutation = useMutation((product) => putOne(pno, product));
 
   const handleClickModify = () => {
     const files = uplodaRef.current.files;
@@ -65,35 +75,68 @@ const ModifyComponent = ({ pno }) => {
       formData.append("uploadFileNames", product.uploadFileNames[i]);
     }
 
-    // fetching
-    setFetching(true);
+    modMutation.mutate(formData);
 
-    putOne(pno, formData).then((data) => {
-      setResult("Modified");
-      setFetching(false);
-    });
+    // fetching
+    // setFetching(true);
+
+    // putOne(pno, formData).then((data) => {
+    //   setResult("Modified");
+    //   setFetching(false);
+    // });
+  };
+
+  const delMutation = useMutation((pno) => deleteOne(pno));
+
+  const queryClient = useQueryClient();
+
+  const handleClickDelete = () => {
+    delMutation.mutate(pno);
+    // setFetching(true);
+    // deleteOne(pno).then((data) => {
+    //   setResult("Deleted");
+    //   setFetching(false);
+    // });
   };
 
   const closeModal = () => {
-    if (result === "Modified") {
-      moveToRead(pno); // 조회 화면으로 이동
-    } else if (result === "Deleted") {
-      moveToList({ page: 1 });
+    if (delMutation.isSuccess) {
+      queryClient.invalidateQueries(["products", pno]);
+      queryClient.invalidateQueries("products/list");
+      moveToList();
+      return;
     }
-    setResult(null);
-  };
+    if (modMutation.isSuccess) {
+      queryClient.invalidateQueries(["products", pno]);
+      queryClient.invalidateQueries("products/list");
+      moveToRead(pno);
+    }
 
-  const handleClickDelete = () => {
-    setFetching(true);
-    deleteOne(pno).then((data) => {
-      setResult("Deleted");
-      setFetching(false);
-    });
+    // if (result === "Modified") {
+    //   moveToRead(pno); // 조회 화면으로 이동
+    // } else if (result === "Deleted") {
+    //   moveToList({ page: 1 });
+    // }
+    // setResult(null);
   };
 
   return (
     <div className="border-2 border-sky-200 mt-10 m-2 p-4">
-      {fetching ? <FetchingModal /> : <></>}
+      {query.isFetching || delMutation.isLoading || modMutation.isLoading ? (
+        <FetchingModal />
+      ) : (
+        <></>
+      )}
+      {delMutation.isSuccess || modMutation.isSuccess ? (
+        <ResultModal
+          title={"처리 결과"}
+          content={"정상적으로 처리되었습니다"}
+          callbackFn={closeModal}
+        />
+      ) : (
+        <></>
+      )}
+      {/* {fetching ? <FetchingModal /> : <></>}
       {result ? (
         <ResultModal
           title={`${result}`}
@@ -102,7 +145,7 @@ const ModifyComponent = ({ pno }) => {
         />
       ) : (
         <></>
-      )}
+      )} */}
       <div className="flex justify-center">
         <div className="relative mb-4 flex w-full flex-wrap items-stretch">
           <div className="w-1/5 p-6 text-right font-bold">Product Name</div>
