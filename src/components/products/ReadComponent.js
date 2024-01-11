@@ -23,32 +23,30 @@ const ReadComponent = ({ pno }) => {
   //화면 이동용 함수
   const { moveToList, moveToModify } = useCustomMove();
 
+  const { loginState } = useCustomLogin();
+
+  const { cartItems, changeCart } = useCustomCart();
+
   const { isFetching, data } = useQuery(["products", pno], () => getOne(pno), {
-    staleTime: 1000 * 10,
+    staleTime: 1000 * 10 * 60,
     retry: 1,
   });
 
   //fetching
   // const [fetching, setFetching] = useState(false);
 
-  //장바구니 기능
-  //const { changeCart, cartItems } = useCustomCart();
-
-  //로그인 정보
-  //const { loginState } = useCustomLogin();
-
   const handleClickAddCart = () => {
-    // let qty = 1;
-    // const addedItem = cartItems.filter((item) => item.pno === parseInt(pno))[0];
-    // if (addedItem) {
-    //   if (
-    //     window.confirm("이미 추가된 상품입니다. 추가하시겠습니까? ") === false
-    //   ) {
-    //     return;
-    //   }
-    //   qty = addedItem.qty + 1;
-    // }
-    // changeCart({ email: loginState.email, pno: pno, qty: qty });
+    let qty = 1;
+    const addedItem = cartItems.filter((item) => item.pno === parseInt(pno))[0];
+    if (addedItem) {
+      if (
+        window.confirm("이미 추가된 상품입니다. 추가하시겠습니까? ") === false
+      ) {
+        return;
+      }
+      qty = addedItem.qty + 1;
+    }
+    changeCart({ email: loginState.email, pno: pno, qty: qty });
   };
 
   const product = data || initState;

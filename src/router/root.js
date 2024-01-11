@@ -4,7 +4,7 @@ import todoRouter from "./todoRouter";
 import productsRouter from "./productsRouter";
 import memberRouter from "./memberRouter";
 
-const Loading = () => <div>Loading...</div>;
+const Loading = <div>Loading....</div>;
 
 const Main = lazy(() => import("../pages/MainPage"));
 const About = lazy(() => import("../pages/AboutPage"));
