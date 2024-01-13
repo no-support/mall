@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { getOne, putOne, deleteOne } from "../../api/productsApi";
+import { getOne, putOne, deleteOne, s3_host } from "../../api/productsApi";
 import FetchingModal from "../common/FetchingModal";
 import ResultModal from "../common/ResultModal";
 import { API_SERVER_HOST } from "../../api/todoApi";
@@ -232,7 +232,7 @@ const ModifyComponent = ({ pno }) => {
                   DELETE
                 </button>
 
-                <img src={`${host}/api/products/view/s_${imgFile}`} alt="img" />
+                <img src={`${s3_host}/s_${imgFile}`} alt="img" />
               </div>
             ))}
           </div>

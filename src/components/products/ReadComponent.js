@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getOne } from "../../api/productsApi";
+import { getOne, s3_host } from "../../api/productsApi";
 import { API_SERVER_HOST } from "../../api/todoApi";
 import useCustomMove from "../../hooks/useCustomMove";
 import FetchingModal from "../common/FetchingModal";
@@ -104,7 +104,7 @@ const ReadComponent = ({ pno }) => {
             alt="product"
             key={i}
             className="p-4 w-1/2"
-            src={`${host}/api/products/view/${imgFile}`}
+            src={`${s3_host}/${imgFile}`}
           />
         ))}
       </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useCustomMove from "../../hooks/useCustomMove";
 import { API_SERVER_HOST } from "../../api/todoApi";
 import FetchingModal from "../common/FetchingModal";
-import { getList } from "../../api/productsApi";
+import { getList, s3_host } from "../../api/productsApi";
 import PageComponent from "../common/PageComponent";
 import useCustomLogin from "../../hooks/useCustomLogin";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -90,7 +90,7 @@ const ListComponent = () => {
                   <img
                     alt="product"
                     className="m-auto rounded-md w-60"
-                    src={`${host}/api/products/view/s_${product.uploadFileNames[0]}`}
+                    src={`${s3_host}/s_${product.uploadFileNames[0]}`}
                   />
                 </div>
 

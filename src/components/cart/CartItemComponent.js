@@ -1,3 +1,4 @@
+import { s3_host } from "../../api/productsApi";
 import { API_SERVER_HOST } from "../../api/todoApi";
 
 const host = API_SERVER_HOST;
@@ -20,7 +21,7 @@ const CartItemComponent = ({
     <li key={cino} className="border-2">
       <div className="w-full border-2">
         <div className="flex justify-center m-1 p-1 ">
-          <img src={`${host}/api/products/view/s_${imageFile}`} />
+          <img src={`${s3_host}/s_${imageFile}`} />
         </div>
 
         <div className="justify-center p-2 text-xl ">
