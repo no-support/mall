@@ -4,7 +4,8 @@ import { API_SERVER_HOST } from "./todoApi";
 const rest_api_key = `77609a7eb78761a384d5d2038524a6a0`;
 
 // const redirect_uri = `http://localhost:3000/member/kakao`;
-const redirect_uri = `http://react.ap-northeast-2.elasticbeanstalk.com/member/kakao`;
+// const redirect_uri = `https://react.ap-northeast-2.elasticbeanstalk.com/member/kakao`;
+const redirect_uri = `https://www.no-support.site/member/kakao`;
 
 const auth_code_path = `https://kauth.kakao.com/oauth/authorize`;
 

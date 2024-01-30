@@ -1,8 +1,7 @@
 import axios from "axios";
 import jwtAxios from "../util/jwtUtil";
 
-export const API_SERVER_HOST =
-  "http://mall.ap-northeast-2.elasticbeanstalk.com";
+export const API_SERVER_HOST = "https://backend.no-support.site";
 
 // export const API_SERVER_HOST = "http://localhost:5000";
 

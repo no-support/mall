@@ -1,0 +1,41 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cicd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - run: npm ci
+      - run: npm run test
+      - run: CI='false' npm run build
+      - name: Generate deployment package
+        # run: zip -r deploy.zip . -x '*.git*'
+        run: zip -r deploy.zip . -x '*.git*' -x 'node_modules/*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: frontapp
+          environment_name: Frontapp-env
+          version_label: v1.0.0
+          region: ap-northeast-2
+          deployment_package: deploy.zip
+
+      # - name: deploy to s3
+      #   uses: jakejarvis/s3-sync-action@master
+      #   with:
+      #     args: --delete
+      #   env:
+      #     AWS_S3_BUCKET: ${{secrets.AWS_S3_BUCKET}}
+      #     AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+      #     AWS_REGION: 'ap-northeast-2'
+      #     SOURCE_DIR: 'build'
