@@ -16,12 +16,7 @@ const KakaoRedirectPage = () => {
 
   useEffect(() => {
     getAccessToken(authCode).then((accessToken) => {
-      console.log(accessToken);
-
       getMemberWithAccessToken(accessToken).then((memberInfo) => {
-        console.log("---------------");
-        console.log(memberInfo);
-
         // dispatch(login(memberInfo));
 
         saveAsCookie(memberInfo);

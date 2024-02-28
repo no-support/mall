@@ -29,7 +29,6 @@ const ListComponent = () => {
   useEffect(() => {
     getList({ page, size })
       .then((data) => {
-        console.log(data);
         setServerData(data);
       })
       .catch((err) => exceptionHandle(err));

@@ -26,8 +26,6 @@ const loginSlice = createSlice({
   initialState: loadMemberCookie() || initState, // 쿠키가 없다면 초깃값 사용
   reducers: {
     login: (state, action) => {
-      console.log("login.....");
-
       // {소셜 로그인 회원이 사용}
       const payload = action.payload;
 
@@ -41,7 +39,6 @@ const loginSlice = createSlice({
       // return { email: data.email };
     },
     logout: (state, action) => {
-      console.log("logout.....");
       removeCookie("member");
       return { ...initState };
     },
@@ -49,7 +46,6 @@ const loginSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loginPostAsync.fulfilled, (state, action) => {
-        console.log("fulfulled");
         const payload = action.payload;
 
         // 정상적인 로그인 시에만 저장
@@ -58,12 +54,8 @@ const loginSlice = createSlice({
         }
         return payload;
       })
-      .addCase(loginPostAsync.pending, (state, action) => {
-        console.log("pending");
-      })
-      .addCase(loginPostAsync.rejected, (state, action) => {
-        console.log("rejected");
-      });
+      .addCase(loginPostAsync.pending, (state, action) => {})
+      .addCase(loginPostAsync.rejected, (state, action) => {});
   },
 });
 

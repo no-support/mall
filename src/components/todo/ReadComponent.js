@@ -17,7 +17,6 @@ const ReadComponent = ({ tno }) => {
 
   useEffect(() => {
     getOne(tno).then((data) => {
-      console.log(data);
       setTodo(data);
     });
   }, [tno]);

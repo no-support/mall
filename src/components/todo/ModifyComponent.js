@@ -26,14 +26,12 @@ const ModifyComponent = ({ tno }) => {
 
   const handleClickModify = () => {
     putOne(todo).then((data) => {
-      // console.log("modify result: " + data);
       setResult("Modified");
     });
   };
 
   const handleClickDelete = () => {
     deleteOne(tno).then((data) => {
-      // console.log("delete result: " + data);
       setResult("Deleted");
     });
   };

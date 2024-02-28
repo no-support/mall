@@ -26,7 +26,6 @@ const useCustomLogin = () => {
   const doLogin = async (loginParam) => {
     // ----- 로그인 함수
     const result = await loginPost(loginParam);
-    console.log(result);
     saveAsCookie(result);
     return result;
     // const action = await dispatch(loginPostAsync(loginParam));
@@ -63,9 +62,7 @@ const useCustomLogin = () => {
   };
 
   const exceptionHandle = (ex) => {
-    console.log("Exception-----------------");
-
-    console.log(ex);
+    console.log("Exception\t", ex);
 
     const errorMsg = ex.response.data.error;
 

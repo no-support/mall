@@ -20,3 +20,8 @@ export const modifyMember = async (member) => {
   const res = await jwtAxios.put(`${host}/modify`, member);
   return res.data;
 };
+
+export const joinMember = async (member) => {
+  const res = await axios.post(`${host}/join`, member);
+  return res.data;
+};

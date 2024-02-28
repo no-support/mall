@@ -24,10 +24,8 @@ const AddComponent = () => {
   };
 
   const handleClickAdd = () => {
-    // console.log(todo);
     postAdd(todo)
       .then((result) => {
-        console.log(result);
         setResult(result.TNO);
         setTodo({ ...initState });
       })

@@ -49,7 +49,6 @@ const AddComponent = () => {
     // postAdd(formData).then((data) => {
     //   setFetching(false);
     //   setResult(data.result);
-    //   console.log(data);
     // });
   };
 

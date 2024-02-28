@@ -7,7 +7,6 @@ import memberRouter from "./memberRouter";
 const Loading = <div>Loading....</div>;
 
 const Main = lazy(() => import("../pages/MainPage"));
-const About = lazy(() => import("../pages/AboutPage"));
 const TodoIndex = lazy(() => import("../pages/todo/IndexPage"));
 const ProductIndex = lazy(() => import("../pages/products/IndexPage"));
 
@@ -17,14 +16,6 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={Loading}>
         <Main />
-      </Suspense>
-    ),
-  },
-  {
-    path: "about",
-    element: (
-      <Suspense fallback={Loading}>
-        <About />
       </Suspense>
     ),
   },

@@ -21,13 +21,9 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCartItemsAsync.fulfilled, (state, action) => {
-        console.log("getCartItemsAsync fulfilled");
-
         return action.payload;
       })
       .addCase(postChangeCartAsync.fulfilled, (state, action) => {
-        console.log("postCartItemsAsync fulfilled");
-
         return action.payload;
       });
   },

@@ -42,12 +42,10 @@ const useCustomMove = () => {
   };
 
   const moveToModify = (num) => {
-    console.log(queryDefault);
     navigate({ pathname: `../modify/${num}`, search: queryDefault });
   };
 
   const moveToRead = (num) => {
-    console.log(queryDefault);
     navigate({ pathname: `../read/${num}`, search: queryDefault });
   };
 

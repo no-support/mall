@@ -1,9 +1,17 @@
 import axios from "axios";
 import jwtAxios from "../util/jwtUtil";
 
-export const API_SERVER_HOST = "https://backend.no-support.site";
+let backendHost;
 
-// export const API_SERVER_HOST = "http://localhost:5000";
+const hostname = window && window.location && window.location.hostname;
+
+if (hostname === "localhost") {
+  backendHost = "http://localhost:5000";
+} else {
+  backendHost = "https://backend.no-support.site";
+}
+
+export const API_SERVER_HOST = `${backendHost}`;
 
 const prefix = `${API_SERVER_HOST}/api/todo`;
 

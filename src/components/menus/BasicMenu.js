@@ -15,9 +15,6 @@ const BasicMenu = () => {
           <li className="pr-6 text-2xl">
             <Link to="/">Main</Link>
           </li>
-          <li className="pr-6 text-2xl">
-            <Link to="/about">About</Link>
-          </li>
 
           {loginState.email ? (
             <>
@@ -36,9 +33,14 @@ const BasicMenu = () => {
 
       <div className="w-1/5 flex justify-end bg-orange-300 p-4 font-medium ">
         {!loginState.email ? (
-          <div className="text-white text-sm m-1 rounded">
-            <Link to={"/member/login"}>Login</Link>
-          </div>
+          <>
+            <div className="text-white text-sm m-1 rounded">
+              <Link to={"/member/join"}>Join</Link>
+            </div>
+            <div className="text-white text-sm m-1 rounded">
+              <Link to={"/member/login"}>Login</Link>
+            </div>
+          </>
         ) : (
           <div className="text-white text-sm m-1 rounded">
             <Link to={"/member/logout"}>Logout</Link>

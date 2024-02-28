@@ -60,7 +60,6 @@ const ListComponent = () => {
   //   setFetching(true);
   //   getList({ page, size })
   //     .then((data) => {
-  //       console.log(data);
   //       setServerData(data);
   //       setFetching(false);
   //     })
