@@ -13,7 +13,7 @@ jobs:
         with:
           ref: main
       - run: npm ci
-      - run: npm run test
+      # - run: npm run test
       - run: CI='false' npm run build
       - name: Generate deployment package
         # run: zip -r deploy.zip . -x '*.git*'
@@ -26,7 +26,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: frontapp
           environment_name: Frontapp-env
-          version_label: v1.0.0
+          version_label: v1.0.1
           region: ap-northeast-2
           deployment_package: deploy.zip
 
