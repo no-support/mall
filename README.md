@@ -6,6 +6,7 @@
 또는
 **https://www.no-support.site**
 (동일한 환경입니다.) 
+샘플 id: user1@aaa.com // pw: 1111
 
 ## Architecture
 
