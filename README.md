@@ -1,12 +1,13 @@
 ![react](https://img.shields.io/badge/react-444444?style=for-the-badge&logo=react) ![typescript](https://img.shields.io/badge/typescript-444444?style=for-the-badge&logo=typescript) ![redux-tool-kit](https://img.shields.io/badge/redux_tool_kit-444444?style=for-the-badge&logo=redux) ![recoil](https://img.shields.io/badge/recoil-444444?style=for-the-badge&logo=recoil) ![react-query](https://img.shields.io/badge/react_query-444444?style=for-the-badge&logo=react-query) ![react-hook-form](https://img.shields.io/badge/react_hook_form-444444?style=for-the-badge&logo=react-hook-form) ![react-router](https://img.shields.io/badge/react_router-444444?style=for-the-badge&logo=react-router) ![tailwind-css](https://img.shields.io/badge/tailwind_css-444444?style=for-the-badge&logo=tailwind-css)
 
-# Url
+## 240326. 서버 비용 부담으로 호스팅 중단
+![aws 요금](https://github.com/no-support/mall/assets/50227723/f86a06f5-a604-4a67-9cde-42a7f24eee11)
 
-**https://no-support.site**
-또는
-**https://www.no-support.site**
-(동일한 환경입니다.) 
-샘플 id: user1@aaa.com // pw: 1111
+## Url
+
+ - ~~**https://no-support.site**~~ 또는 ~~**https://www.no-support.site**~~ (동일한 환경입니다.) 
+ - 샘플 id: user1@aaa.com // pw: 1111
+ - 서버 비용 부담으로 호스팅 중단(2024.03.26.)
 
 ## Architecture
 
